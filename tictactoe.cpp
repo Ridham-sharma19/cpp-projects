@@ -1,5 +1,5 @@
 #include<iostream>
-#include <typeinfo>
+
 using namespace std;
 
 
@@ -36,10 +36,7 @@ bool makeMove(char turn, int cellnumber ){
     int row = (cellnumber - 1) / 3;
     int col = (cellnumber - 1) % 3; //as we are starting from 1 so (-1)
 
-        if(typeid(cellnumber).name()!="i"){// checking type 
-             cout << "Invalid cell! Choose between 1 to 9.\n";
-             return false;
-        }
+        
 
      if (cellnumber < 1 || cellnumber > 9) {
         cout << "Invalid cell! Choose between 1-9.\n";
@@ -76,12 +73,62 @@ char checkWinner() {
     return ' ';
 }
 
+//all the cells are covered
+bool isDraw() {
+    for (int i = 0; i < 3; i++)
+        for (int j = 0; j < 3; j++)
+            if (grid[i][j] != 'X' && grid[i][j] != 'O')
+                return false;
+    return true;
+}
 
 
 int main(){
+    char turn;
+    char winner = ' ';
+    int cell;
+
     gameStart();
-    currentGrid();
+  cout << "================================================================================\n";
+cout << ",--------.,--. ,-----.    ,--------. ,---.   ,-----.    ,--------. ,-----. ,------. \n";
+cout << "'--.  .--'|  |'  .--./    '--.  .--'/  O  \\ '  .--./   '--.  .--''  .-.  '|  .---' \n";
+cout << "   |  |   |  ||  |           |  |  |  .-.  ||  |           |  |   |  | |  ||  `--,  \n";
+cout << "   |  |   |  |'  '--'\\      |  |  |  | |  |'  '--'\\      |  |   '  '-'  '|  `---. \n";
+cout << "   `--'   `--' `-----'       `--'  `--' `--' `-----'       `--'    `-----' `------' \n";
+cout << "================================================================================\n";
 
+                                                                                                  
+                                                                                                  
+    cout << "Player 1 -> X\nPlayer 2 -> O\n";
+    cout << "Choose who makes the first move (X or O): ";
+    cin >> turn;
 
-return 0;
+    
+    turn = toupper(turn);
+
+    currentGrid(); 
+
+    while (true) {
+        cout << "Player " << turn << ", enter a cell (1-9): ";
+        cin >> cell;
+
+        if (!makeMove(turn, cell)) continue;
+        currentGrid(); 
+
+        winner = checkWinner();
+
+        if (winner != ' ') {
+            cout << " Player " << winner << " wins! \n";
+            break;
+        } else if (isDraw()) {
+            cout << "It's a draw! 🤝\n";
+            break;
+        }
+
+        // Switching  turn
+        turn = (turn == 'X') ? 'O' : 'X';
+    }
+
+    cout << "\nThanks for playing!\n";
+    return 0;
 }
