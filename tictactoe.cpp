@@ -13,21 +13,25 @@ void gameStart(){
     }
 }
 
-
-void gameprint(){
-    
-    for(int i = 0 ; i <3;i++){
-        for(int j = 0 ; j < 3 ; j++){
-            cout<<grid[i][j]<<" ";
+void currentGrid() {//using - instead of _
+    cout << "\n";
+    cout << "-------------\n";
+    for (int i = 0; i < 3; i++) {
+        cout << "| ";
+        for (int j = 0; j < 3; j++) {
+            cout << grid[i][j] << " | ";
         }
-        cout<<endl;
-
+        cout << "\n-------------\n";
     }
+    cout << "\n";
+    
 }
+
+
 
 int main(){
     gameStart();
-    gameprint();
+    currentGrid();
 
 
 return 0;
