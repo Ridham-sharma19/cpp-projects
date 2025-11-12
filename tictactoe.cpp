@@ -1,80 +1,93 @@
-#include<iostream>
+#include <iostream>
 
 using namespace std;
 
-
-//global matrix
+// global matrix
 char grid[3][3];
 
-void gameStart(){
+void gameStart()
+{
     char value = '1';
-    for(int i = 0 ; i <3;i++){
-        for(int j = 0 ; j < 3 ; j++){
-            grid[i][j]=value++;
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            grid[i][j] = value++;
         }
-
     }
 }
 
-void currentGrid() {//using - instead of _
+void currentGrid()
+{ // using - instead of _
     cout << "\n";
     cout << "-------------\n";
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 3; i++)
+    {
         cout << "| ";
-        for (int j = 0; j < 3; j++) {
+        for (int j = 0; j < 3; j++)
+        {
             cout << grid[i][j] << " | ";
         }
         cout << "\n-------------\n";
     }
     cout << "\n";
-    
 }
 
-//make a move
+// make a move
 
-bool makeMove(char turn, int cellnumber ){
+bool makeMove(char turn, int cellnumber)
+{
     int row = (cellnumber - 1) / 3;
-    int col = (cellnumber - 1) % 3; //as we are starting from 1 so (-1)
+    int col = (cellnumber - 1) % 3; // as we are starting from 1 so (-1)
 
-        
-
-     if (cellnumber < 1 || cellnumber > 9) {
+    if (cellnumber < 1 || cellnumber > 9)
+    {
         cout << "Invalid cell! Choose between 1-9.\n";
         return false;
     }
 
-    if (grid[row][col] == 'X' || grid[row][col] == 'O') {//is already acquired
+    if (grid[row][col] == 'X' || grid[row][col] == 'O')
+    { // is already acquired
         cout << "Cell already taken! Choose another.\n";
         return false;
     }
     grid[row][col] = turn;
     return true;
-
 }
 
-char checkWinner() {
+char checkWinner()
+{
     // checking  Rows
-    for (int i = 0; i < 3; i++){
+    for (int i = 0; i < 3; i++)
+    {
         if (grid[i][0] == grid[i][1] && grid[i][1] == grid[i][2])
-            return grid[i][0];}
+            return grid[i][0];
+    }
 
-    //checking  Columns
-    for (int j = 0; j < 3; j++){
+    // checking  Columns
+    for (int j = 0; j < 3; j++)
+    {
         if (grid[0][j] == grid[1][j] && grid[1][j] == grid[2][j])
-            return grid[0][j];}
+            return grid[0][j];
+    }
 
-    //checking Diagonals
-    if (grid[0][0] == grid[1][1] && grid[1][1] == grid[2][2]){
-        return grid[0][0];}
+    // checking Diagonals
+    if (grid[0][0] == grid[1][1] && grid[1][1] == grid[2][2])
+    {
+        return grid[0][0];
+    }
 
-    if (grid[0][2] == grid[1][1] && grid[1][1] == grid[2][0]){
-        return grid[0][2];}
+    if (grid[0][2] == grid[1][1] && grid[1][1] == grid[2][0])
+    {
+        return grid[0][2];
+    }
 
     return ' ';
 }
 
-//all the cells are covered
-bool isDraw() {
+// all the cells are covered
+bool isDraw()
+{
     for (int i = 0; i < 3; i++)
         for (int j = 0; j < 3; j++)
             if (grid[i][j] != 'X' && grid[i][j] != 'O')
@@ -82,45 +95,53 @@ bool isDraw() {
     return true;
 }
 
-
-int main(){
+int main()
+{
     char turn;
     char winner = ' ';
     int cell;
 
     gameStart();
-  cout << "================================================================================\n";
-cout << ",--------.,--. ,-----.    ,--------. ,---.   ,-----.    ,--------. ,-----. ,------. \n";
-cout << "'--.  .--'|  |'  .--./    '--.  .--'/  O  \\ '  .--./   '--.  .--''  .-.  '|  .---' \n";
-cout << "   |  |   |  ||  |           |  |  |  .-.  ||  |           |  |   |  | |  ||  `--,  \n";
-cout << "   |  |   |  |'  '--'\\      |  |  |  | |  |'  '--'\\      |  |   '  '-'  '|  `---. \n";
-cout << "   `--'   `--' `-----'       `--'  `--' `--' `-----'       `--'    `-----' `------' \n";
-cout << "================================================================================\n";
 
-                                                                                                  
-                                                                                                  
+    cout<<endl;
+
+      cout << " $$$$$$$\\  $$$$$$\\  $$$$$$\\        $$$$$$$$\\  $$$$$$\\   $$$$$$\\        $$$$$$$$\\  $$$$$$\\  $$$$$$$$\\ " << endl;
+    cout << " \\__$$  __|\\__$$  _|$$  __$$\\       \\__$$  __|$$  __$$\\ $$  __$$\\       \\__$$  __|$$  __$$\\ $$  _____|" << endl;
+    cout << "    $$ |     $$ |  $$ /  \\__|         $$ |   $$ /  $$ |$$ /  \\__|         $$ |   $$ /  $$ |$$ |      " << endl;
+    cout << "    $$ |     $$ |  $$ |               $$ |   $$$$$$$$ |$$ |               $$ |   $$ |  $$ |$$$$$\\    " << endl;
+    cout << "    $$ |     $$ |  $$ |               $$ |   $$  __$$ |$$ |               $$ |   $$ |  $$ |$$  __|   " << endl;
+    cout << "    $$ |     $$ |  $$ |  $$\\          $$ |   $$ |  $$ |$$ |  $$\\          $$ |   $$ |  $$ |$$ |      " << endl;
+    cout << "    $$ |   $$$$$$\\ \\$$$$$$  |         $$ |   $$ |  $$ |\\$$$$$$  |         $$ |    $$$$$$  |$$$$$$$\\ " << endl;
+    cout << "    \\__|   \\______| \\______/          \\__|   \\__|  \\__| \\______/          \\__|    \\______/ \\________|" << endl;
+    cout << endl << endl;
+    
+
     cout << "Player 1 -> X\nPlayer 2 -> O\n";
     cout << "Choose who makes the first move (X or O): ";
     cin >> turn;
 
-    
     turn = toupper(turn);
 
-    currentGrid(); 
+    currentGrid();
 
-    while (true) {
+    while (true)
+    {
         cout << "Player " << turn << ", enter a cell (1-9): ";
         cin >> cell;
 
-        if (!makeMove(turn, cell)) continue;
-        currentGrid(); 
+        if (!makeMove(turn, cell))
+            continue;
+        currentGrid();
 
         winner = checkWinner();
 
-        if (winner != ' ') {
+        if (winner != ' ')
+        {
             cout << " Player " << winner << " wins! \n";
             break;
-        } else if (isDraw()) {
+        }
+        else if (isDraw())
+        {
             cout << "It's a draw! 🤝\n";
             break;
         }
