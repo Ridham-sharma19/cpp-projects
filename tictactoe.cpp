@@ -142,7 +142,7 @@ int main()
         }
         else if (isDraw())
         {
-            cout << "It's a draw! 🤝\n";
+            cout << "It's a draw! \n";
             break;
         }
 
