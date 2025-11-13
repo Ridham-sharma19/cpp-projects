@@ -44,7 +44,10 @@ class orderBook{
                buying[0].price >= selling[0].price) {
 
             int tradeQty = min(buying[0].quantity, selling[0].quantity);
-            double tradePrice = selling[0].price; // trade happens at sell price
+            double tradePrice = selling[0].price; // trade happens at selling  price
+
+            cout<<endl;
+            cout<<endl;
 
             cout << "Trade executed: " << tradeQty << " $ " << tradePrice << endl;
 
@@ -52,7 +55,7 @@ class orderBook{
             buying[0].quantity -= tradeQty;
             selling[0].quantity -= tradeQty;
 
-            // Remove completed orders
+            // Removing  completed orders i.e whrn quantity becomes 0
             if (buying[0].quantity == 0)
                 buying.erase(buying.begin());
             if (selling[0].quantity == 0)
